@@ -10,3 +10,14 @@ export const GET_TODOS = gql`
     }
   }
 `;
+
+export const GET_PRODUCTS = gql`
+  {
+    getProducts {
+      id
+      title
+      detail
+      img
+    }
+  }
+`;

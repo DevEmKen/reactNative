@@ -1,0 +1,19 @@
+version: "3.8"  # Specify the Docker Compose version
+
+services:
+  em-mongo:
+    image: mongo:latest  # Replace with your actual MongoDB image name
+    ports:
+      - "27017:27017"  # Map container port 27017 to host port 27017 (optional)
+
+  em-apollo:
+    image: myaposerv  # Use your Apollo server image name
+    ports:
+      - "5000:5000"  # Map container port 5000 to host port 5000
+    depends_on:
+      - em-mongo  # Ensure Apollo server starts after MongoDB is ready
+    environment:
+      MONGO_URI: mongodb://em-mongo:27017  # Use service name for MongoDB
+
+networks:
+  default:

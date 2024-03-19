@@ -7,31 +7,23 @@ import {
   ApolloProvider,
 } from "@apollo/client";
 import { GET_TODOS } from "./graphql/query";
-import Frontpg from "./Frontpg";
+import { NavigationContainer } from "@react-navigation/native";
+import AppNavigator from "./navigation.js";
 
 // Initialize Apollo Client
 const client = new ApolloClient({
-  uri: "http://192.168.1.26:5000/graphql",
+  uri: "http://192.168.1.28:5000/graphql",
   cache: new InMemoryCache(),
 });
 
 export default function App() {
-  //const { loading, error, data } = useQuery(GET_TODOS); //MARKED!
-  //console.log(data);
   return (
     <ApolloProvider client={client}>
-      <Frontpg client={client} />
+      <NavigationContainer>
+        <AppNavigator />
+      </NavigationContainer>
     </ApolloProvider>
   );
 }
 
 AppRegistry.registerComponent("MyApplication", () => App);
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
