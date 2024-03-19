@@ -8,6 +8,7 @@ const productSchema = new Schema(
     },
     detail: String,
     img: String,
+    rating: Number,
   },
   { timestamps: true }
 );

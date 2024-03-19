@@ -29,6 +29,7 @@ const resolvers = {
         title: args.title,
         detail: args.detail,
         img: args.img,
+        rating: args.rating,
       });
       await newProduct.save();
       return newProduct;

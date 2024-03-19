@@ -17,6 +17,7 @@ export const GET_PRODUCTS = gql`
       id
       title
       detail
+      rating
       img
     }
   }

@@ -8,6 +8,7 @@ const typeDefs = gql`
     title: String
     detail: String
     img: String
+    rating: Float
   }
 
   type Todo {
