@@ -1,9 +1,9 @@
 ## A test application built with React Native, Expo, Apollo, GraphQL, and MongoDB.
 
-### Alternatively, watch the demo video "appvid.mp4"
 
 To run, first download Docker and start an instance of the mongoDB server with the command:
 `docker run -d mongo:latest`
+(Alternatively, watch the demo video "appvid.mp4")
 Then identify the IP address of the mongoDB instance through Inspect -> Networks -> IPAddress field. Change the IP address in the .env file in the "nativeedit" folder to match this identified mongoDB server IP. The port should remain default: 27017.
 Run `npm install` inside both the nativeedit and serv folder to give access to necessary packages for both applications.
 
