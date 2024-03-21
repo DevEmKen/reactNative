@@ -1,6 +1,15 @@
 import mongoose from "mongoose";
 import Product from "./models/product.js";
 
+//
+//
+//
+// This is the file to seed the mongoDB image on Docker with products.
+// Run with "node seed.js" within the Docker exec tab for the instance.
+//
+//
+//
+
 const products = [
   {
     title: "Real Good Food",
@@ -42,12 +51,49 @@ const products = [
     detail: "You should probably wait for it to cool down.",
     img: "https://images.pexels.com/photos/954677/pexels-photo-954677.jpeg",
   },
+  {
+    title: "Doge Toast",
+    rating: 4.2,
+    detail: "very good",
+    img: "https://images.pexels.com/photos/920220/pexels-photo-920220.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+  },
+  {
+    title: "Ice Cream Cloud",
+    rating: 1.3,
+    detail: "Too airy, needs more dairy",
+    img: "https://images.pexels.com/photos/1262302/pexels-photo-1262302.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+  },
+  {
+    title: "French Fries",
+    rating: 3.5,
+    detail: "Best served fresh. Do not buy these from whataburger or in n out",
+    img: "https://images.pexels.com/photos/1583884/pexels-photo-1583884.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+  },
+  {
+    title: "Churro",
+    rating: 3.6,
+    detail:
+      "These are pretty hard to find in Washington state. -1 star for availability",
+    img: "https://images.pexels.com/photos/372851/pexels-photo-372851.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+  },
+  {
+    title: "Cupcake",
+    rating: 2.9,
+    detail: "Hey there, cupcake. Hows it going cupcake?",
+    img: "https://images.pexels.com/photos/1055272/pexels-photo-1055272.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+  },
+  {
+    title: "Lobster",
+    rating: 2.1,
+    detail: "Extremely tasty for a bug.",
+    img: "https://images.pexels.com/photos/1194431/pexels-photo-1194431.jpeg?auto=compress&cs=tinysrgb&w=300",
+  },
 
   // ... more products
 ];
 
 mongoose
-  .connect("mongodb://172.17.0.4:27017", {
+  .connect("mongodb://172.17.0.3:27017", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })

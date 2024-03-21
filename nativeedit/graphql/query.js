@@ -1,5 +1,6 @@
 import { gql } from "@apollo/client";
 
+// Boilerplate example code from setup
 export const GET_TODOS = gql`
   {
     getTodos {
@@ -12,13 +13,22 @@ export const GET_TODOS = gql`
 `;
 
 export const GET_PRODUCTS = gql`
-  {
-    getProducts {
-      id
-      title
-      detail
-      rating
-      img
+  query getProducts($after: Int, $first: Int, $sort: String) {
+    getProducts(after: $after, first: $first, sort: $sort) {
+      edges {
+        node {
+          id
+          title
+          detail
+          rating
+          img
+        }
+        cursor
+      }
+      pageInfo {
+        hasNextPage
+        endCursor
+      }
     }
   }
 `;

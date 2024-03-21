@@ -5,12 +5,20 @@ import resolvers from "./resolvers.js";
 import mongoose from "mongoose";
 import cors from "cors";
 import dotenv from "dotenv";
+import ProductAPI from "./datasource.js";
 
 async function initServer() {
   const app = express();
   app.use(cors());
   dotenv.config();
-  const apolloServer = new ApolloServer({ typeDefs, resolvers });
+  const apolloServer = new ApolloServer({
+    typeDefs,
+    resolvers,
+    debug: true,
+    dataSources: () => ({
+      productAPI: new ProductAPI(), // Create a new instance of ProductAPI
+    }),
+  });
   await apolloServer.start();
   apolloServer.applyMiddleware({ app });
   app.use((req, res) => {

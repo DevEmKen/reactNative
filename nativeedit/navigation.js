@@ -2,25 +2,24 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { TouchableOpacity, Image } from "react-native";
 import Frontpg from "./Frontpg.js";
 import UserProfileScreen from "./UserProfileScreen.js";
+import food1 from "./assets/person.png";
 
 const Stack = createStackNavigator();
 
 const renderLeftHeader = (navigation) => {
-  // Implement your Accordion component here (refer to Accordion libraries)
-  // For example, using react-native-collapsible
+  // Possible accordion menu here
   return (
     <TouchableOpacity onPress={() => navigation.navigate("Menu")}>
-      {/* Your Accordion UI here */}
+      {}
     </TouchableOpacity>
   );
 };
 
 const renderRightHeader = (navigation) => {
+  // Render clickable user profile pic
   return (
     <TouchableOpacity onPress={() => navigation.navigate("UserProfile")}>
-      {
-        //YEah
-      }
+      <Image source={food1} className="h-10 w-10 m-2 rounded-full" />
     </TouchableOpacity>
   );
 };

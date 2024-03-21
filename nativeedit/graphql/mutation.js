@@ -1,5 +1,6 @@
 import { gql } from "@apollo/client";
 
+// Boilerplate example code from setup
 export const ADD_TODO = gql`
   mutation addTodo($title: String, $detail: String) {
     addTodo(title: $title, detail: $detail) {

@@ -3,14 +3,19 @@ import Product from "./models/product.js";
 
 const resolvers = {
   Query: {
-    getProducts: async () => {
-      const products = await Product.find();
+    getProducts: async (_, { after, first, sort }, { dataSources }) => {
+      const products = await dataSources.productAPI.getProducts({
+        after,
+        first,
+        sort,
+      });
       return products;
     },
     getProduct: async (root, args) => {
       const product = await Product.findById(args.id);
       return product;
     },
+    // Welcome and getTodos are boilerplate example code from setup
     welcome: () => {
       return "Welcomeee";
     },
@@ -34,6 +39,7 @@ const resolvers = {
       await newProduct.save();
       return newProduct;
     },
+    // Add, delete, update Todo are boilerplate example code from setup
     addTodo: async (root, args) => {
       const newTodo = new Todo({
         title: args.title,

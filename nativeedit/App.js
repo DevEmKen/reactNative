@@ -6,17 +6,48 @@ import {
   InMemoryCache,
   ApolloProvider,
 } from "@apollo/client";
+//import { loadErrorMessages, loadDevMessages } from "@apollo/client/dev";
 import { GET_TODOS } from "./graphql/query";
 import { NavigationContainer } from "@react-navigation/native";
 import AppNavigator from "./navigation.js";
 
+const cache = new InMemoryCache({
+  typePolicies: {
+    Query: {
+      fields: {
+        getProducts: {
+          keyArgs: false,
+          merge(existing, incoming, { args: { after } }) {
+            let merged = null;
+            //console.log("exists is " + JSON.stringify(existing));
+            //console.log("incoming is " + JSON.stringify(incoming));
+            if (existing && after !== 0) {
+              merged = { ...existing };
+              merged.edges = [
+                merged.edges.slice(),
+                incoming.edges.slice(),
+              ].flat();
+            } else {
+              merged = { ...incoming };
+            }
+
+            return merged;
+          },
+        },
+      },
+    },
+  },
+});
+
 // Initialize Apollo Client
 const client = new ApolloClient({
   uri: "http://192.168.1.28:5000/graphql",
-  cache: new InMemoryCache(),
+  cache,
 });
 
 export default function App() {
+  //loadErrorMessages();
+  //loadDevMessages();
   return (
     <ApolloProvider client={client}>
       <NavigationContainer>

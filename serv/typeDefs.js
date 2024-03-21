@@ -11,6 +11,21 @@ const typeDefs = gql`
     rating: Float
   }
 
+  type ProductEdge {
+    node: Product!
+    cursor: String!
+  }
+
+  type PageInfo {
+    hasNextPage: Boolean!
+    endCursor: String!
+  }
+
+  type ProductConnection {
+    edges: [ProductEdge!]!
+    pageInfo: PageInfo!
+  }
+
   type Todo {
     id: ID
     title: String
@@ -19,7 +34,7 @@ const typeDefs = gql`
   }
 
   type Query {
-    getProducts: [Product]
+    getProducts(after: Int, first: Int, sort: String): ProductConnection!
     getProduct(id: ID): Product
     welcome: String
     getTodos: [Todo]
