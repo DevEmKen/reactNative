@@ -6,10 +6,14 @@
 
 To run, first download Docker and start an instance of the mongoDB server with the command:
 `docker run -d mongo:latest`
-Then identify the IP address of the mongoDB instance through Inspect -> Networks -> IPAddress field. Change the IP address in the .env file in the "nativeedit" folder to match this identified mongoDB server IP. The port should remain default: 27017.
+
+Then, identify the IP address of the mongoDB instance through Inspect -> Networks -> IPAddress field. Change the IP address in the .env file in the "serv" folder to match this identified mongoDB server IP. The port should remain default: 27017.
+
 Run `npm install` inside both the nativeedit and serv folder to give access to necessary packages for both applications.
+
 Compile the Apollo server folder to an image and run it with docker.
 Seed the mongoDB database by running "node seed.js" inside the Apollo server docker instance.
+
 Run `expo start` inside the React Native folder, and connect a phone or an emulator on the LAN.
 
 ## The Experience
