@@ -19,8 +19,8 @@ const cache = new InMemoryCache({
           keyArgs: false,
           merge(existing, incoming, { args: { after } }) {
             let merged = null;
-            //console.log("exists is " + JSON.stringify(existing));
-            //console.log("incoming is " + JSON.stringify(incoming));
+            // "After" is the start index from which to slice the
+            // data array. If it's over 0, we should append new data
             if (existing && after !== 0) {
               merged = { ...existing };
               merged.edges = [

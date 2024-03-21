@@ -8,7 +8,8 @@ class ProductAPI extends DataSource {
 
   async getProducts({ after = 0, first, sort }) {
     // "after" is the starting index for slice(),
-    // first is the
+    // first is the end index
+
     var sortObject = {};
 
     const sortMap = {
@@ -19,19 +20,20 @@ class ProductAPI extends DataSource {
     };
 
     if (sort in sortMap) {
-      console.log("sort matched");
       sortObject = sortMap[sort];
     }
 
     const products = await Product.find().sort(sortObject);
 
-    console.log("products is " + products);
     const totalCount = products.length;
     const edges = products.slice(after, first).map((product) => ({
       node: product,
-      cursor: product._id.toString(), // Assuming cursor based on product ID
+      cursor: product._id.toString(), // Not actually used by the program as of now
     }));
 
+    // This boolean is getting calculated & returned correctly.
+    // Need to look into why "load more" button is
+    // still showing even when hasNextPage returns false
     const hasNextPage = products.length > first;
     const endCursor = products.length;
     return {

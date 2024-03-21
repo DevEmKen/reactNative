@@ -17,6 +17,9 @@ import _ from "lodash";
 const Frontpg = () => {
   const PAGESIZE = 5;
   const client = useApolloClient();
+  // Used by the ModalSelector element.
+  // Labels are passed as-is, and actually used in datasources.js
+  // as the key to map to the proper mongoDB sorting object
   const selections = [
     { key: 0, label: "Rating ↓" },
     { key: 1, label: "Rating ↑" },
@@ -28,7 +31,7 @@ const Frontpg = () => {
     variables: { first: PAGESIZE },
   });
   const [sortTag, setSortTag] = useState({ label: "Sort..." });
-  const [loadMoreLoading, setLoadMoreLoading] = useState(false);
+  const [moreLoading, setMoreLoading] = useState(false);
 
   if (error) console.log(JSON.stringify(error));
 
@@ -44,9 +47,15 @@ const Frontpg = () => {
   };
 
   const handleLoadMore = () => {
-    setLoadMoreLoading(true);
+    setMoreLoading(true);
+
+    // Calculate how to slice incoming data based on current number
+    // of products loaded
     const after = data.getProducts.edges.length;
     const first = after + PAGESIZE;
+
+    // If user hasn't sorted before loading more,
+    // pass "undefined" as sort arg
     const currSort = sortTag.label === "Sort..." ? undefined : sortTag.label;
     fetchMore({
       variables: {
@@ -55,7 +64,7 @@ const Frontpg = () => {
         sort: currSort,
       },
     })
-      .then(() => setLoadMoreLoading(false))
+      .then(() => setMoreLoading(false))
       .catch((error) => console.error(error));
   };
 
@@ -96,7 +105,7 @@ const Frontpg = () => {
       ListFooterComponent={() =>
         data?.getProducts.pageInfo.hasNextPage && (
           <Button
-            title={loadMoreLoading ? "Loading..." : "Load More"}
+            title={moreLoading ? "Loading..." : "Load More"}
             onPress={handleLoadMore}
           />
         )
